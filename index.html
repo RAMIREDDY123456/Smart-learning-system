@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Learning | Accessible Learning</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Smart Learning home"><span class="brand-icon">SL</span><span>Smart Learning</span></a>
+    <nav>
+      <button class="nav-link active" data-page="home">Home</button>
+      <button class="nav-link" data-page="learn">Lessons</button>
+      <button class="nav-link" data-page="communication">Communication</button>
+      <button class="nav-link" data-page="quiz">Quiz</button>
+      <button class="nav-link" data-page="progress">My Progress</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="page active">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">LEARN • COMMUNICATE • GROW</p>
+          <h1>Learning made easier<br><span>for everyone.</span></h1>
+          <p class="hero-copy">A simple learning space with visual lessons, communication tools and progress tracking for deaf and hard-of-hearing students.</p>
+          <button class="primary" data-go="learn">Start learning</button>
+        </div>
+        <div class="hero-card">
+          <div class="hero-symbol">✋</div>
+          <h3>Learn at your own pace</h3>
+          <p>Explore signs, practise communication and build confidence one lesson at a time.</p>
+        </div>
+      </div>
+      <div class="section-heading"><div><p class="eyebrow">YOUR LEARNING SPACE</p><h2>What would you like to do?</h2></div></div>
+      <div class="feature-grid">
+        <button class="feature-card" data-go="learn"><span class="feature-icon purple">📘</span><b>Visual lessons</b><small>Learn useful everyday words and signs.</small></button>
+        <button class="feature-card" data-go="communication"><span class="feature-icon blue">💬</span><b>Communication tools</b><small>Convert speech to text and text to speech.</small></button>
+        <button class="feature-card" data-go="quiz"><span class="feature-icon orange">⭐</span><b>Practice quiz</b><small>Test what you have learned.</small></button>
+        <button class="feature-card" data-go="progress"><span class="feature-icon green">📈</span><b>My progress</b><small>See your learning achievements.</small></button>
+      </div>
+    </section>
+
+    <section id="learn" class="page">
+      <div class="page-heading"><p class="eyebrow">VISUAL LEARNING</p><h1>Lessons</h1><p>Choose a topic and practise the meaning of each sign.</p></div>
+      <div id="lessonGrid" class="lesson-grid"></div>
+      <div id="lessonDetail" class="panel hidden" aria-live="polite"></div>
+    </section>
+
+    <section id="communication" class="page">
+      <div class="page-heading"><p class="eyebrow">COMMUNICATION</p><h1>Communication tools</h1><p>Simple tools to support communication in the classroom.</p></div>
+      <div class="two-col">
+        <div class="panel">
+          <div class="panel-icon blue">🎙️</div><h2>Speech to text</h2>
+          <p class="muted">Use your microphone to show spoken words as text. Best supported in Google Chrome.</p>
+          <button id="startSpeech" class="primary">Start listening</button>
+          <button id="stopSpeech" class="secondary" disabled>Stop</button>
+          <div id="speechStatus" class="status" role="status">Microphone is not active.</div>
+          <div id="speechResult" class="result-box" aria-live="polite">Your recognised words will appear here.</div>
+        </div>
+        <div class="panel">
+          <div class="panel-icon purple">🔊</div><h2>Text to speech</h2>
+          <p class="muted">Type a message and let the browser read it aloud.</p>
+          <label for="speakText">Your message</label>
+          <textarea id="speakText" rows="4" placeholder="Type a message here..."></textarea>
+          <div class="button-row"><button id="speakButton" class="primary">Speak message</button><button id="clearSpeak" class="secondary">Clear</button></div>
+          <div id="speakStatus" class="status" role="status"></div>
+        </div>
+      </div>
+      <div class="panel sign-panel">
+        <div><p class="eyebrow">SIGN WORD BANK</p><h2>Explore common signs</h2><p class="muted">Select a word to see its meaning. This starter version uses a visual word bank, not live camera recognition.</p></div>
+        <div id="signGrid" class="sign-grid"></div>
+        <div id="signMeaning" class="result-box">Choose a sign above.</div>
+      </div>
+      <p class="notice"><b>Note:</b> Speech recognition depends on browser support and microphone permission. Sign recognition by live camera is not included in this basic version.</p>
+    </section>
+
+    <section id="quiz" class="page">
+      <div class="page-heading"><p class="eyebrow">CHECK YOUR KNOWLEDGE</p><h1>Practice quiz</h1><p>Answer three questions to receive a learning recommendation.</p></div>
+      <div class="panel quiz-panel">
+        <div class="quiz-top"><span id="questionNumber">Question 1 of 3</span><span id="quizScore">Score: 0</span></div>
+        <div class="progress-track"><div id="quizBar" class="progress-fill"></div></div>
+        <h2 id="questionText"></h2>
+        <div id="answerOptions" class="answer-options"></div>
+        <p id="answerFeedback" class="feedback" aria-live="polite"></p>
+        <div class="button-row"><button id="nextQuestion" class="primary" disabled>Next question</button><button id="restartQuiz" class="secondary">Restart</button></div>
+        <div id="quizRecommendation" class="recommendation hidden" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="progress" class="page">
+      <div class="page-heading"><p class="eyebrow">YOUR ACHIEVEMENTS</p><h1>My progress</h1><p>Your activity is saved in this browser on this device.</p></div>
+      <div class="stats-grid">
+        <div class="stat-card"><span>Lessons completed</span><strong id="lessonsCount">0</strong></div>
+        <div class="stat-card"><span>Quiz attempts</span><strong id="quizAttempts">0</strong></div>
+        <div class="stat-card"><span>Best quiz score</span><strong id="bestScore">0/3</strong></div>
+      </div>
+      <div class="panel">
+        <h2>Learning summary</h2><p id="progressMessage" class="muted">Complete a lesson or quiz to see your progress here.</p>
+        <div class="progress-track"><div id="overallBar" class="progress-fill"></div></div>
+        <button id="resetProgress" class="secondary danger-button">Reset my progress</button>
+      </div>
+    </section>
+  </main>
+
+  <footer><b>Smart Learning</b><span>Inclusive learning for every student.</span></footer>
+  <script src="script.js"></script>
+</body>
+</html>
